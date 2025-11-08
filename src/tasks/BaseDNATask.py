@@ -43,15 +43,6 @@ class BaseDNATask(BaseTask):
         if isinstance(box, Box):
             self.draw_boxes(box.name, box, "blue")
         return self.find_one(f'drop_item_{str(rates)}', threshold=threshold, box=box, template=template)
-    
-    def click_until(self, click_func: callable, check_func: callable, check_interval: float = 2, time_out: float = 10):
-        start = time.time()
-        while time.time() - start < time_out:
-            click_func()
-            if self.wait_until(check_func, time_out=check_interval, raise_if_not_found=False):
-                break
-        else:
-            raise Exception("click_until timeout")
 
     def safe_get(self, key, default=None):
         if hasattr(self, key):
